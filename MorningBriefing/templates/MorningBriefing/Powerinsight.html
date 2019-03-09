@@ -1,0 +1,267 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Power Insight</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script></head>
+  <style>
+    .scrolltbody {
+        display: block;
+        width: 210mm;
+        border-collapse: collapse;
+        border: 2px solid #000;
+    }
+    .scrolltbody th { border: 1px solid #000; background: pink; text-align: center; }
+    .scrolltbody td { border: 1px solid #000; border-top: 0; }
+    .scrolltbody tbody {
+        display: block;
+        height: 150px;
+        overflow: auto;
+    }
+    .scrolltbody th:nth-of-type(1), .scrolltbody td:nth-of-type(1) { width: 150mm; }
+    .scrolltbody th:nth-of-type(2), .scrolltbody td:nth-of-type(2) { width: 60mm; }
+    .scrolltbody th:nth-of-type(3), .scrolltbody td:nth-of-type(3) { width: 10px; }
+    .scrolltbody th:last-child { width: 100px; }
+    .scrolltbody td:last-child { width: calc( 100px - 19px );  }
+    </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{% url 'MorningBriefing:home' %}">Home</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li>
+        </li>
+        <li><a href = "{% url 'MorningBriefing:발전사동향' %}">발전사동향</a></li>
+        <li><a href = "{% url 'MorningBriefing:전력산업/시장'%}">전력산업/시장</a></li>
+        <li><a href = "{% url 'MorningBriefing:신재생에너지/기술'%}">신재생에너지/기술</a></li>
+        <li><a href = "{% url 'MorningBriefing:경제/에너지'%}">경제/에너지</a></li>
+        <li><a href = "{% url 'MorningBriefing:파워인사이트'%}">파워인사이트</a></li>
+        <li><a href = "{% url 'MorningBriefing:보고서'%}">보고서</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead> 
+        <tr>
+            <td><B><font size=10>
+                리포트 자동 검색기 
+            </font></B></td>   
+           <!-- <a href="upload">파일업로드</a>-->
+        </tr>
+        </thead>
+            <td style= "width:50px">
+              <form method="post">
+                {% csrf_token %}
+                
+                <label style="text-align: left"><font size = 3><B>start date<input type="date" style = "text-align: right;border: 0px; font-size: 3" name="start_date" value="{{start_date}}"></B></font>
+                <label style="text-align: left"><font size = 3><B>end  date<input type="date" style = "text-align: right;border: 0px; font-size: 3" name="end_date" value="{{end_date}}"></B></font>
+                <input name="search" value="{{search}}">
+                <input type="submit" class="btn btn-success" value="검색">
+              
+              </form>
+            </td>
+          </table>
+
+      <div>
+      <tbody>
+                <table class='scrolltbody'>
+                  <label style ="font-size:18pt ;background-color: pink;  ">에너지경제연구원</label>
+                  <tr>
+                  <th>제목</th>
+                  <th>출판일</th>
+                  <th>링크</th>
+                  {% for report in report %}
+                  <tr align="center"> 
+
+                  <div>{%if report.site == '에너지경제연구원'%}
+                    <td>{{report.title}}</td>
+                    <td>{{report.published_date}} </td>
+                    <td><button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{report.link}}')">Go</button></td>
+                          {%endif%}{%endfor%}
+                    </div>
+                  </tr>
+                </tr>
+                  </table>
+      </tbody> 
+      </div>
+      <br>
+      <div>
+          <tbody>
+                    <table class='scrolltbody'>
+                      <label style ="font-size:18pt ;background-color: pink;">LG경제연구원</label>
+                      <tr>
+                      <th>제목</th>
+                      <th>출판일</th>
+                      <th>링크</th>
+                      {% for report in report %}
+                      <tr align="center"> 
+    
+                      <div>{%if report.site == 'LG경제연구원'%}
+                        <td>{{report.title}}</td>
+                        <td>{{report.published_date}} </td>
+                        <td><button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{report.link}}')">Go</button></td>
+                              {%endif%}{%endfor%}
+                        </div>
+                      </tr>
+                    </tr>
+                      </table>
+          </tbody> 
+          </div>
+          <br>
+
+      <div>
+      <tbody>
+                <table class='scrolltbody'>
+                  <label style ="font-size:18pt;background-color: pink;">코트라</label>
+                  <tr>
+                  <th>제목</th>
+                  <th>출판일</th>
+                  <th>링크</th>
+                  {% for report in report %}
+                  <tr align="center"> 
+
+                  <div>{%if report.site == '코트라'%}
+                    <td>{{report.title}}</td>
+                    <td>{{report.published_date}} </td>
+                    <td><button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{report.link}}')">Go</button></td>
+                          {%endif%}{%endfor%}
+                    </div>
+                  </tr>
+                </tr>
+                  </table>
+      </tbody> 
+      </div>
+      <br>
+
+      <div>
+          <tbody>
+                    <table class='scrolltbody'>
+                      <label style ="font-size:18pt;background-color: pink;">현대경제연구원</label>
+                      <tr>
+                      <th>제목</th>
+                      <th>출판일</th>
+                      <th>링크</th>
+                      {% for report in report %}
+                      <tr align="center"> 
+    
+                      <div>{%if report.site == '현대경제연구원'%}
+                        <td>{{report.title}}</td>
+                        <td>{{report.published_date}} </td>
+                        <td><button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{report.link}}')">Go</button></td>
+                              {%endif%}{%endfor%}
+                        </div>
+                      </tr>
+                    </tr>
+                      </table>
+          </tbody> 
+          </div>
+          <br>
+
+          <div>
+              <tbody>
+                        <table class='scrolltbody'>
+                          <label style ="font-size:18pt;background-color: pink;">삼성경제연구소</label>
+                          <tr>
+                          <th>제목</th>
+                          <th>출판일</th>
+                          <th>링크</th>
+                          {% for report in report %}
+                          <tr align="center"> 
+        
+                          <div>{%if report.site == '삼성경제연구소'%}
+                            <td>{{report.title}}</td>
+                            <td>{{report.published_date}} </td>
+                            <td><button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{report.link}}')">Go</button></td>
+                                  {%endif%}{%endfor%}
+                            </div>
+                          </tr>
+                        </tr>
+                          </table>
+              </tbody> 
+              </div>
+              <br>
+
+              <div>
+                  <tbody>
+                            <table class='scrolltbody'>
+                              <label style ="font-size:18pt;background-color: pink;">포스코경영연구원</label>
+                              <tr>
+                              <th>제목</th>
+                              <th>출판일</th>
+                              <th>링크</th>
+                              {% for report in report %}
+                              <tr align="center"> 
+            
+                              <div>{%if report.site == '포스코경영연구원'%}
+                                <td>{{report.title}}</td>
+                                <td>{{report.published_date}} </td>
+                                <td><button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{report.link}}')">Go</button></td>
+                                      {%endif%}{%endfor%}
+                                </div>
+                              </tr>
+                            </tr>
+                              </table>
+                  </tbody> 
+                  </div>
+                  <br>
+
+                  <div>
+                      <tbody>
+                                <table class='scrolltbody'>
+                                  <label style ="font-size:18pt;background-color: pink;">한전경제연구원</label>
+                                  <tr>
+                                  <th>제목</th>
+                                  <th>출판일</th>
+                                  <th>링크</th>
+                                  {% for report in report %}
+                                  <tr align="center"> 
+                
+                                  <div>{%if report.site == '한전경제연구원'%}
+                                    <td>{{report.title}}</td>
+                                    <td>{{report.published_date}} </td>
+                                    <td><button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{report.link}}')">Go</button></td>
+                                          {%endif%}{%endfor%}
+                                    </div>
+                                  </tr>
+                                </tr>
+                                  </table>
+                      </tbody> 
+                      </div>
+                      <br>
+
+                      <div>
+                          <tbody>
+                                    <table class='scrolltbody'>
+                                      <label style ="font-size:18pt;background-color: pink;">수출입은행해외경제연구소</label>
+                                      <tr>
+                                      <th>제목</th>
+                                      <th>출판일</th>
+                                      <th>링크</th>
+                                      {% for report in report %}
+                                      <tr align="center"> 
+                    
+                                      <div>{%if report.site == '수출입은행해외경제연구소'%}
+                                        <td>{{report.title}}</td>
+                                        <td>{{report.published_date}} </td>
+                                        <td><button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{report.link}}')">Go</button></td>
+                                              {%endif%}{%endfor%}
+                                        </div>
+                                      </tr>
+                                    </tr>
+                                      </table>
+                          </tbody> 
+                          </div>                               
+
+
+</body>

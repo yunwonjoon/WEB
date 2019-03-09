@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Morning Briefing</title>
+  <meta content="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+
+  <style type="text/css">
+        label,h1, h2, h3, h4, h5, dl, dt, dd, ul, li, ol, th, td, p, blockquote, form, fieldset, legend, div,body { -webkit-print-bgcolor-adjust:exact; }
+        label,h1, h2, h3, h4, h5, dl, dt, dd, ul, li, ol, th, td, p, blockquote, form, fieldset, legend, div,body {
+font-family : Nanum
+font-size = 12pt
+ }      
+        
+  </style>
+
+</head>
+
+<body style="width: 210mm">
+    
+<div>
+        <table>
+                        <tr><label style="color: royalblue;font-weight:bold; font-size: 34pt;text-align: center;"><B>　　　Morning Briefing　　　</B></label></tr>
+                        <tr> <img src="C:\Users\wonjo\Final\WEB\MorningBriefing\templates\MorningBriefing\logo.png"  width="120" height="60"/></tr>
+                       
+        </table>
+       
+</div>    
+    <div style ="background:darkcyan;"> 
+       <input type="date" style = "background:darkcyan; text-align: right;border: 0px; font-size: 4" value='19-03-02'>
+        <label>　　　　　　　　　　　　　　　　　　　　　　　　인재기술개발원 연구기획부(5710)</label>
+</div>
+
+  
+ 
+<div>
+
+                <br>
+
+        <label style="border: solid steelblue; border-width: 1 10px 3px ; background:steelblue"><font size = 4>1</font></label><label style="border: solid steelblue; border-width: 0 0 3px ;">　발전사동향</label>
+        <br><br>
+        {% for news in news %}
+        {% if news.Data_field == 'A' %}
+        {% if news.Comment != ''%}
+
+        <ui onclick="window.open('{{news.Link}}')"><b><font size = 2>　○　{{news.Title}}　　　[{{news.Published_date}}]</font></b></ui><br>
+        <ui><font size=2>　　　-　{{news.Comment}}</font></ui><br>
+        
+                {% endif %}
+                {% endif %}
+                {% endfor %} 
+                <br>
+</div>
+<div>
+                <label style="border: solid steelblue; border-width: 1 1 3px ; background:steelblue"><font size = 4>2</font></label><label style="border: solid steelblue; border-width: 0 0 3px ;">　전력산업/시장</label>
+                <br><br>
+        {% for news in news %}
+        {% if news.Data_field == 'B' %}
+        {% if news.Comment != ''%}
+
+        <ui onclick="window.open('{{news.Link}}')"><b><font size = 2>　○　{{news.Title}}　　　[{{news.Published_date}}]</font></b></oi><br>
+        <ui><font size=2>　　　-　{{news.Comment}}</font></ui><br>
+        
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+   
+                <br>
+</div>
+
+<div>        
+        <label style="border: solid steelblue; border-width: 1 1 3px ; background:steelblue"><font size = 4>3</font></label><label style="border: solid steelblue; border-width: 0 0 3px ;">　신재생에너지/기술</label>
+        <br><br>
+        {% for news in news %}
+        {% if news.Data_field == 'C' %}
+        {% if news.Comment != ''%}
+
+        <ui onclick="window.open('{{news.Link}}')"><b><font size = 2>　○　{{news.Title}}　　　[{{news.Published_date}}]</font></b></ui><br>
+        <ui><font size=2>　　　-　{{news.Comment}}</font></ui><br>
+        
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                
+                <br>
+</div>
+
+<div>
+                <label style="border: solid steelblue; border-width: 1 1 3px ; background:steelblue"><font size = 4>4</font></label><label style="border: solid steelblue; border-width: 0 0 3px ;">　경제/에너지</label>
+                     <br><br>
+                {% for news in news %}
+                {% if news.Data_field == 'D' %}
+                {% if news.Comment != ''%}
+                
+                <ui onclick="window.open('{{news.Link}}')"><b><font size = 2>　○　{{news.Title}}　　　[{{news.Published_date}}]</font></b></ui><br>
+                <ui><font size=2>　　　-　{{news.Comment}}</font></ui><br>
+                        
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        <br>
+        
+</div>
+       
+</body>
+       

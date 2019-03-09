@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Morning Briefing</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+   
+<div class="container">
+    <table class="table table-striped">
+        <thead> 
+        <tr>
+            <td><B><font size=10>
+                TREND
+
+            </font></B></td>   
+        </tr>
+        </thead>
+<tbody>
+
+
+    <tr>
+        <td>
+                <div class="btn-group btn-group-justified" style = "text-align: center">
+                        <button type= "button"  onclick="location.href='발전사동향' ">발전사동향</button>
+                        <button type= "button"  onclick="location.href='전력산업/시장' ">전력산업/시장</button>
+                        <button type= "button"  onclick="location.href='신재생에너지/기술' ">신재생에너지/기술</button>
+                        <button type= "button"  onclick="location.href='경제/에너지' ">경제/에너지</button>
+                        <button type= "button"  onclick="location.href='보고서' ">보고서</button>
+                        <button type= "button"  onclick="location.href='파워인사이트' ">파워인사이트</button>
+                        <button type= "button" href="{% url 'MorningBriefing:보고서초기화' %}"onclick="return confirm('정말 삭제하시겠습니까?')">보고서초기화</button>
+                    </div>     
+        </td>
+       
+      
+       </div>
+     </tr>
+          
+          
+          
+      
+        <tbody>
+    </table>
+</body>

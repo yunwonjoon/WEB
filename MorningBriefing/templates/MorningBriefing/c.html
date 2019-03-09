@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Morning Briefing</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'MorningBriefing:home' %}">Home</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li>
+            </li>
+            <li><a href = "{% url 'MorningBriefing:발전사동향' %}">발전사동향</a></li>
+            <li><a href = "{% url 'MorningBriefing:전력산업/시장'%}">전력산업/시장</a></li>
+            <li><a href = "{% url 'MorningBriefing:신재생에너지/기술'%}">신재생에너지/기술</a></li>
+            <li><a href = "{% url 'MorningBriefing:경제/에너지'%}">경제/에너지</a></li>
+            <li><a href = "{% url 'MorningBriefing:파워인사이트'%}">파워인사이트</a></li>
+            <li><a href = "{% url 'MorningBriefing:보고서'%}">보고서</a></li>
+
+          </ul>
+        </div>
+      </nav>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead> 
+        <tr>
+            <td><B><font size=10>신재생에너지/기술</font></B></td>   
+            <td style= "width:50px">
+              <form method="post">
+                {% csrf_token %}
+                
+                <div style="text-align: left"><font size = 3><B>start date<input type="date" style = "text-align: right;border: 0px; font-size: 3" name="start_date" value="{{start_date}}"></B></font>
+                <div style="text-align: left"><font size = 3><B>end  date<input type="date" style = "text-align: right;border: 0px; font-size: 3" name="end_date" value="{{end_date}}"></B></font>
+                <input name="search" value="{{search}}">
+                <input type="submit" class="btn btn-success" value="검색">
+              
+              </form>
+            </td>
+        </tr>
+        </thead>
+
+        <tbody>       
+
+            {% for news in news %}
+
+            {% if news.Data_field == 'C' %}
+        <tr>
+
+            <td>
+
+
+                <div>
+                   <p><font size=3>{{news.Title}}({{news.Published_date}})</font></p>
+                  <p>{{news.Comment}}</p>
+
+                </div>
+              </span>
+              <div align="right">
+                <div class="btn-group">
+                  <button type="submit" class="btn btn-success"  style="text-align:right;" onclick="window.open('{{news.Link}}')">Go</button>
+                  <a class="btn btn-light" href="{%url 'MorningBriefing:modify_title' pk=news.pk %}">Modify_title</a>
+                  <a class="btn btn-primary" href="{%url 'MorningBriefing:add_comment_to_post' pk=news.pk %}">Add comment</a>
+                <a href="{% url 'MorningBriefing:delete_news' pk=news.pk %}" class="btn btn-warning del" role="button" onclick="return confirm('정말 삭제하시겠습니까?')">Delete comment</a>
+              <a href="{% url 'MorningBriefing:delete' pk=news.pk %}" class="btn btn-danger del" role="button" onclick="return confirm('정말 삭제하시겠습니까?')">Delete News</a>
+              </div>
+              </div>
+ 
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+    </script>
+          
+
+        </tbody>
+    </table>
+</body>
